@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.aeza.parse">
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ChatWithAeza"
+        tools:targetApi="31"
+        android:name="com.aeza.chat.Notif">
+        <activity
+            android:name="com.aeza.chat.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <service
+            android:name="com.parse.fcm.ParseFirebaseMessagingService" android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <receiver android:name="com.aeza.chat.NotifReceiver" android:exported="false"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+                <action android:name="com.parse.push.intent.RECEIVE"/>
+                <action android:name="com.parse.push.intent.DELETE"/>
+                <action android:name="com.parse.push.intent.OPEN"/>
+                <category android:name="com.aeza.parse"/>
+            </intent-filter>
+        </receiver>
+
+        <meta-data android:name="com.parse.SERVER_URL" android:value="https://parseapi.back4app.com/"/>
+        <meta-data android:name="com.parse.APPLICATION_ID" android:value="mkVqU6mLkx2NlD2ldO3MoLUibTOBHH3rKax7yBL9"/>
+        <meta-data android:name="com.parse.CLIENT_KEY" android:value="SW5nWj7SuTbWQHd4gB8SJOy1OHOTroeT2DLPILS5"/>
+        <meta-data android:name="com.parse.push.gcm_sender_id" android:value="738972861003"/>
+    </application>
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <permission android:name="com.aeza.parse.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.aeza.parse.permission.C2D_MESSAGE"/>
+</manifest>
