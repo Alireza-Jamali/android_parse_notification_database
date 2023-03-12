@@ -39,9 +39,9 @@
         </receiver>
 
         <meta-data android:name="com.parse.SERVER_URL" android:value="https://parseapi.back4app.com/"/>
-        <meta-data android:name="com.parse.APPLICATION_ID" android:value="mkVqU6mLkx2NlD2ldO3MoLUibTOBHH3rKax7yBL9"/>
-        <meta-data android:name="com.parse.CLIENT_KEY" android:value="SW5nWj7SuTbWQHd4gB8SJOy1OHOTroeT2DLPILS5"/>
-        <meta-data android:name="com.parse.push.gcm_sender_id" android:value="738972861003"/>
+        <meta-data android:name="com.parse.APPLICATION_ID" android:value="TODO ADD YOUR OWN"/>
+        <meta-data android:name="com.parse.CLIENT_KEY" android:value="TODO ADD YOUR OWN"/>
+        <meta-data android:name="com.parse.push.gcm_sender_id" android:value="TODO ADD YOUR OWN"/>
     </application>
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18"/>
