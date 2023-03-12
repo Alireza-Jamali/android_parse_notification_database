@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Notif.initParse(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         aeza = new User(id, "aeza", BitmapFactory.decodeResource(getResources(), R.drawable.aeza));
@@ -91,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
         mChatView.setOnBubbleLongClickListener(v -> new NameFrag().show(getSupportFragmentManager(), "name_frag"));
         mChatView.setOnIconLongClickListener(v -> new NameFrag().setLastName().show(getSupportFragmentManager(), "name_frag2"));
 
-        Notif.initParse(this);
         Notif.subscribeToChannels(Notif.senderId, Arrays.asList("online", name));
         Notif.sendMsg("aeza", name + " is online", "online");
 

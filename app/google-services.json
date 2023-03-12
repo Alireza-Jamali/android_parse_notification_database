@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "738972861003",
+    "project_id": "chatpush-93b50",
+    "storage_bucket": "chatpush-93b50.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738972861003:android:3aade87fd4ab4828e383ce",
+        "android_client_info": {
+          "package_name": "com.aeza.parse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738972861003-spt7q7gre29ik7590jm6rk63ooujtfh1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6adut52HrMejnHuYbyQn3fUC_lUBY9dE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738972861003-spt7q7gre29ik7590jm6rk63ooujtfh1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
