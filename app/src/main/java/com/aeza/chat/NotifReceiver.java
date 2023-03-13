@@ -68,7 +68,8 @@ public class NotifReceiver extends ParsePushBroadcastReceiver {
             if (!title.equals("aeza"))
                 MainActivity.instance.lastName = title;
             alert = pushData.optString("alert", "Notification received.");
-            if (isForeground) {
+            if (isForeground && !MainActivity.instance.lastMsg.equals(alert)) {
+                MainActivity.instance.lastMsg = alert;
                 MainActivity.instance.receiveMsg(title, alert);
             }
         }

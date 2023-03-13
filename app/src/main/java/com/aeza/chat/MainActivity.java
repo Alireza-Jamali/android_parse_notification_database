@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sh;
     public String name;
     public String lastName = "";
+    public String lastMsg = "";
     User aeza;
 
     Map<String, User> users = new HashMap<>();
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         Notif.initParse(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mChatView = (ChatView) findViewById(R.id.chat_view);
         aeza = new User(id, "aeza", BitmapFactory.decodeResource(getResources(), R.drawable.aeza));
         users.put("aeza", aeza);
         sh = getSharedPreferences(getPackageName() + ".prefs", MODE_PRIVATE);
@@ -53,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setup() {
-        mChatView = (ChatView) findViewById(R.id.chat_view);
         //Set UI parameters if you need
         mChatView.setRightBubbleColor(ContextCompat.getColor(this, com.github.bassaer.chatmessageview.R.color.green500));
         mChatView.setLeftBubbleColor(Color.WHITE);
@@ -86,7 +87,11 @@ public class MainActivity extends AppCompatActivity {
             ParseObject send = new ParseObject("DawnChat");
             send.put("name", name);
             send.put("msg", msg);
-            send.saveInBackground();
+            send.saveInBackground(e -> {
+                if (e == null) {
+                    objectIds.add(send.getObjectId());
+                }
+            });
 
         });
         mChatView.setOnBubbleLongClickListener(v -> new NameFrag().show(getSupportFragmentManager(), "name_frag"));
@@ -102,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 for (ParseObject data : send) {
                     String name = data.getString("name");
                     if (!name.equals("aeza")) lastName = name;
-                    String msg = data.getString("msg");
+                    String msg = lastMsg = data.getString("msg");
                     objectIds.add(data.getObjectId());
                     Message message = new Message.Builder()
                             .setUser(getUser(name))
@@ -142,46 +147,47 @@ public class MainActivity extends AppCompatActivity {
     int delay = 15 * 1000; //Delay for 15 seconds.  One second = 1000 milliseconds.
 
 
-    @Override
-    protected void onResume() {
-        //start handler as activity become visible
-
-        handler.postDelayed(runnable = new Runnable() {
-            public void run() {
-                ParseQuery<ParseObject> query = ParseQuery.getQuery("DawnChat");
-                query.addAscendingOrder("createdAt");
-                query.findInBackground((send, e) -> {
-                    if (e == null) {
-                        for (ParseObject data : send) {
-                            if (!objectIds.contains(data.getObjectId())) {
-                                String name = data.getString("name");
-                                if (!name.equals("aeza")) lastName = name;
-                                String msg = data.getString("msg");
-                                objectIds.add(data.getObjectId());
-                                Message message = new Message.Builder()
-                                        .setUser(getUser(name))
-                                        .setRight(name.equals(MainActivity.this.name))
-                                        .setText(msg)
-                                        .hideIcon(false)
-                                        .build();
-                                mChatView.send(message);
-                            }
-                        }
-                    }
-                });
-                handler.postDelayed(runnable, delay);
-            }
-        }, delay);
-
-        super.onResume();
-    }
+//    @Override
+//    protected void onResume() {
+//        //start handler as activity become visible
+//
+//        handler.postDelayed(runnable = () -> {
+//            ParseQuery<ParseObject> query = ParseQuery.getQuery("DawnChat");
+//            query.addAscendingOrder("createdAt");
+//            query.findInBackground((send, e) -> {
+//                if (e == null) {
+//                    for (ParseObject data : send) {
+//                        if (!objectIds.contains(data.getObjectId())) {
+//                            String name = data.getString("name");
+//                            if (!name.equals("aeza")) lastName = name;
+//                            String msg = data.getString("msg");
+//                            objectIds.add(data.getObjectId());
+//                            Message message = new Message.Builder()
+//                                    .setUser(getUser(name))
+//                                    .setRight(name.equals(MainActivity.this.name))
+//                                    .setText(msg)
+//                                    .hideIcon(false)
+//                                    .build();
+//                            if (mChatView != null && !msg.equals(lastMsg)) {
+//                                lastMsg = msg;
+//                                mChatView.send(message);
+//                            }
+//                        }
+//                    }
+//                }
+//            });
+//            handler.postDelayed(runnable, delay);
+//        }, delay);
+//
+//        super.onResume();
+//    }
 
 // If onPause() is not included the threads will double up when you
 // reload the activity
 
-    @Override
-    protected void onPause() {
-        handler.removeCallbacks(runnable); //stop handler when activity not visible
-        super.onPause();
-    }
+//    @Override
+//    protected void onPause() {
+//        handler.removeCallbacks(runnable); //stop handler when activity not visible
+//        super.onPause();
+//    }
 }

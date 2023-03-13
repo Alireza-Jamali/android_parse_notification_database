@@ -21,6 +21,9 @@ public class NameFrag extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
+        byte[] ba = new byte[1];
+        new Random().nextBytes(ba);
+        String bay = ba[0] + "";
         FragmentActivity activity = getActivity();
         View view = activity.getLayoutInflater().inflate(R.layout.enter_name_frag, null);
         ((EditText) view.findViewById(R.id.input_name)).setHint(lastName ? "lastName" : "Name");
@@ -28,11 +31,10 @@ public class NameFrag extends DialogFragment {
         builder.setView(view);
         builder.setNeutralButton("OK", (dialog, which) -> {
             String name = ((EditText) view.findViewById(R.id.input_name)).getText().toString();
+            if (name.isEmpty()) name = "goozoo" + bay;
             if (name.contains("aeza")) {
                 if (!name.equals("aeza9999")) {
-                    byte[] ba = new byte[1];
-                    new Random().nextBytes(ba);
-                    name = "gooz" + ba[0];
+                    name = "gooz" + bay;
                 } else {
                     name = "aeza";
                 }
