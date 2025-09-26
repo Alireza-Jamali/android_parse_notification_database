@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         mChatView.setMessageMarginBottom(5);
         mChatView.setOnClickSendButtonListener(view -> {
             String msg = mChatView.getInputText();
+            if (msg.isEmpty()) return;
             Message message = new Message.Builder()
                     .setUser(getUser(name))
                     .setRight(true)

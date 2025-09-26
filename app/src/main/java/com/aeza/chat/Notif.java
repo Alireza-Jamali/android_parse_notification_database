@@ -16,10 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Notif extends Application {
-    static public String back4app_app_id = "TODO ADD YOUR OWN";
-    static public String back4app_client_key = "TODO ADD YOUR OWN";
+    static public String back4app_app_id = "mkVqU6mLkx2NlD2ldO3MoLUibTOBHH3rKax7yBL9";
+    static public String back4app_client_key = "SW5nWj7SuTbWQHd4gB8SJOy1OHOTroeT2DLPILS5";
     static public String back4app_server_url = "https://parseapi.back4app.com/";
-    static public String senderId = "TODO ADD YOUR OWN";
+    static public String senderId = "738972861003";
 
     public static void initParse(Context ctx) {
 //        Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
